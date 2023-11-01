@@ -2,6 +2,7 @@ using Unity.Jobs;
 using UnityEngine;
 using Unity.Collections;
 using Unity.Burst;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 public class Meteor : Damagable
@@ -12,25 +13,25 @@ public class Meteor : Damagable
     private void LateUpdate()
     {
 
-        NativeArray<Vector2> result = new NativeArray<Vector2>(1,Allocator.TempJob);
+        NativeArray<Vector2> result = new NativeArray<Vector2>(1, Allocator.TempJob);
         DetermineNextPosition Job = new DetermineNextPosition
         {
             currentPosition = transform.position,
-            targetPosition =  Vector2.zero,
+            targetPosition = Vector2.zero,
             nextPosition = result
         };
 
         JobHandle jobHandle = Job.Schedule();
         jobHandle.Complete();
-
-        transform.position = Job.nextPosition[0];
+      //  transform.position = result[0];
+          transform.position = Vector2.Lerp(transform.position, Vector3.zero, 0.001f);
         result.Dispose();
 
     }
 }
 
-[BurstCompile(CompileSynchronously = true)]
-public struct DetermineNextPosition: IJob
+[BurstCompile]
+public struct DetermineNextPosition : IJob
 {
     public Vector2 currentPosition;
     public Vector2 targetPosition;
@@ -40,6 +41,6 @@ public struct DetermineNextPosition: IJob
 
     public void Execute()
     {
-        nextPosition[0] = Vector2.Lerp(currentPosition, targetPosition , 0.001f);
+        nextPosition[0] = Vector2.Lerp(currentPosition, targetPosition, 0.001f);
     }
 }

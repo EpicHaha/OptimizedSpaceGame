@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Meteor: {fileID: 6954497856308702571, guid: 48ad732341e46fe41967221ae0d5b5a1, type: 3}
   CurrentMeteorCount: 0
-  MeteorCountPerWave: 1
+  MeteorCountPerWave: 5000
   MeteorIncreasePerWave: 5
   player: {fileID: 374998641}
 --- !u!4 &283219562
@@ -187,7 +187,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5211453307336650846, guid: 963e9505f53295f48ba6cb02b2bfc122, type: 3}
       propertyPath: Speed
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5211453307336650846, guid: 963e9505f53295f48ba6cb02b2bfc122, type: 3}
       propertyPath: Damage

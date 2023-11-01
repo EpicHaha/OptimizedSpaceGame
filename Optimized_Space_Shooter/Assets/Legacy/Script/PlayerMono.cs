@@ -63,13 +63,4 @@ namespace Player
 
 
     }
-
-    public class PlayerBaker: Baker<PlayerMono>
-    {
-                public override void Bake(PlayerMono playerMono)
-                {
-                    // add logic here later
-                }
-        
-    }
 }

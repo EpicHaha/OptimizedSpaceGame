@@ -26,7 +26,7 @@ public class MeteorSpawnerMono : MonoBehaviour
 
     private void SpawnMeteor()
     {
-
+/*
         NativeArray<Vector2> result = new NativeArray<Vector2>(1, Allocator.TempJob);
         RandomPosition Job = new RandomPosition
         {
@@ -41,7 +41,9 @@ public class MeteorSpawnerMono : MonoBehaviour
         result.Dispose();
 
         CurrentMeteorCount++;
+*/
 
+        Vector2 position = new Vector2 (UnityEngine.Random.Range(-40,40), UnityEngine.Random.Range(-40, 40));
 
         Instantiate(Meteor , position ,Quaternion.identity);
     }
@@ -61,7 +63,7 @@ public class MeteorSpawnerMono : MonoBehaviour
 }
 
 
-
+/*
 [BurstCompile(CompileSynchronously = true)]
 public struct RandomPosition : IJob
 {
@@ -75,4 +77,4 @@ public struct RandomPosition : IJob
         SpawnPosition[0] =  new Vector2( rnd.NextInt(-100, 100), rnd.NextInt(-100, 100)); 
 
     }
-}
+}*/
