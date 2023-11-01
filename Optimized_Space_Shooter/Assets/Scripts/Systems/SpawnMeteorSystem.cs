@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
+using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
 [BurstCompile]
@@ -12,6 +13,7 @@ public partial struct SpawnMeteorSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<SpawnerProperties>();
+
     }
 
     [BurstCompile]
@@ -35,9 +37,9 @@ public partial struct SpawnMeteorSystem : ISystem
         {
             var NewMeteor = buffer.Instantiate(spawner.MeteorPrefab);
             var newMeteorTransform = spawner.GetRandomTransform();
-/*
+
             buffer.SetComponent(NewMeteor, newMeteorTransform);
-*/
+        
         }
 
         buffer.Playback(state.EntityManager);
