@@ -62,7 +62,7 @@ public class MeteorSpawnerMono : MonoBehaviour
 
 
 
-[BurstCompile(CompileSynchronously = true)]
+[BurstCompile]
 public struct RandomPosition : IJob
 {
     public int index;

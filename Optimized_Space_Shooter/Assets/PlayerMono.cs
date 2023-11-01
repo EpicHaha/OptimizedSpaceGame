@@ -49,27 +49,14 @@ namespace Player
 
         private void Shoot()
         {
-
-
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up, transform.TransformDirection(Vector3.up) * 1000);
-
-            Debug.DrawLine(transform.position + transform.up, transform.TransformDirection(Vector3.up) * 1000);
-            if (hit)
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, 0))
             {
-                hit.transform.gameObject.GetComponent<Damagable>().TakeDamage(Damage);
-                print(hit.transform);
             }
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) *1000, Color.yellow);
         }
 
 
-    }
-
-    public class PlayerBaker: Baker<PlayerMono>
-    {
-                public override void Bake(PlayerMono playerMono)
-                {
-                    // add logic here later
-                }
-        
     }
 }

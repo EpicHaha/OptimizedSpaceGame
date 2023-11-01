@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Burst;
 
 
+[BurstCompile]
 public class Meteor : Damagable
 {
     public Vector2 targetPosition;
@@ -29,7 +30,7 @@ public class Meteor : Damagable
     }
 }
 
-[BurstCompile(CompileSynchronously = true)]
+//[BurstCompile]
 public struct DetermineNextPosition: IJob
 {
     public Vector2 currentPosition;
