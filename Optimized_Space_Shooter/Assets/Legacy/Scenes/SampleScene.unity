@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Meteor: {fileID: 6954497856308702571, guid: 48ad732341e46fe41967221ae0d5b5a1, type: 3}
   CurrentMeteorCount: 0
-  MeteorCountPerWave: 10000
+  MeteorCountPerWave: 1
   MeteorIncreasePerWave: 5
   player: {fileID: 374998641}
 --- !u!4 &283219562
