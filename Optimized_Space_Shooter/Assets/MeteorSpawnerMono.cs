@@ -37,12 +37,9 @@ public class MeteorSpawnerMono : MonoBehaviour
 
     private void SpawnMeteor()
     {
-       Vector2 position = new Vector2(player.position.x+ Random.RandomRange(-100, 100), player.position.y +  Random.RandomRange(-100, 100));
-        float rotation = Random.RandomRange(0,180);
+       Vector2 position = new Vector2(player.position.x+ Random.Range(-100, 100), player.position.y +  Random.Range(-100, 100));
         CurrentMeteorCount++;
-     GameObject meteorInstance =    Instantiate(Meteor , position ,new Quaternion(0,0,rotation,0));
-        meteorInstance.GetComponent<Meteor>().Player = player;
-        meteorInstance.GetComponent<Meteor>().Spawner = this;
+        Instantiate(Meteor , position ,Quaternion.identity);
     }
 
 

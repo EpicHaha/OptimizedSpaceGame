@@ -1,40 +1,45 @@
-using Player;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
+using Unity.Collections;
+using Unity.Burst;
 
+
+[BurstCompile]
 public class Meteor : Damagable
 {
-    public Transform Player;
-    public MeteorSpawnerMono Spawner;
+    public Vector2 targetPosition;
 
 
-    private void Start()
+    private void Update()
     {
-        MoveTowardsPlayer();
-    }
 
-
-
-    void MoveTowardsPlayer()
-    {
-        GetComponent<Rigidbody2D>().AddForce( Player.position- transform.position ) ;
-
-        Invoke("MoveTowardsPlayer", 1f);
-    }
-
-
-    private void OnDestroy()
-    {
-        Spawner.CurrentMeteorCount--;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.GetComponent<PlayerMono>() != null)
+        NativeArray<Vector2> result = new NativeArray<Vector2>(1,Allocator.TempJob);
+        DetermineNextPosition Job = new DetermineNextPosition
         {
-            collision.gameObject.GetComponent<PlayerMono>().TakeDamage(20);
-            Destroy(gameObject);
-        }
+            currentPosition = transform.position,
+            targetPosition =  Vector2.zero,
+            nextPosition = result
+        };
+
+        JobHandle jobHandle = Job.Schedule();
+        jobHandle.Complete();
+
+        transform.position = Job.nextPosition[0];
+        result.Dispose();
+
+    }
+}
+
+public struct DetermineNextPosition: IJob
+{
+    public Vector2 currentPosition;
+    public Vector2 targetPosition;
+
+
+    public NativeArray<Vector2> nextPosition;
+
+    public void Execute()
+    {
+        nextPosition[0] = Vector2.Lerp(currentPosition, targetPosition , 0.001f);
     }
 }
