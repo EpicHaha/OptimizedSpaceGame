@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Unity.Entities;
 public class MeteorMono : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private EntityManager entityManager;
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

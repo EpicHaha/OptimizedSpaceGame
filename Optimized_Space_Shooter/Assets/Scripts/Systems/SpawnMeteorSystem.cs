@@ -39,7 +39,8 @@ public partial struct SpawnMeteorSystem : ISystem
             var newMeteorTransform = spawner.GetRandomTransform();
 
             buffer.SetComponent(NewMeteor, newMeteorTransform);
-        
+
+
         }
 
         buffer.Playback(state.EntityManager);
