@@ -10,7 +10,7 @@ public class Meteor : Damagable
     public Vector2 targetPosition;
 
 
-    private void Update()
+    private void LateUpdate()
     {
 
         NativeArray<Vector2> result = new NativeArray<Vector2>(1,Allocator.TempJob);
@@ -30,6 +30,7 @@ public class Meteor : Damagable
     }
 }
 
+//[BurstCompile]
 public struct DetermineNextPosition: IJob
 {
     public Vector2 currentPosition;

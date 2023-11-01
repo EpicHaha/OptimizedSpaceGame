@@ -1,10 +1,8 @@
-using Player;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Entities;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
+using System;
 
 public class MeteorSpawnerMono : MonoBehaviour
 {
@@ -14,19 +12,10 @@ public class MeteorSpawnerMono : MonoBehaviour
     public int MeteorIncreasePerWave;
     [SerializeField] private Transform player;
 
-    private void Awake()
+    private void Start()
     {
+        StartNewWave();
     }
-
-    private void Update()
-    {
-        if(CurrentMeteorCount == 0)
-        {
-            MeteorCountPerWave += MeteorIncreasePerWave;
-            StartNewWave();
-        }
-    }
-
     private void StartNewWave()
     {
         for (int i = 0; i < MeteorCountPerWave; i++)
@@ -37,35 +26,53 @@ public class MeteorSpawnerMono : MonoBehaviour
 
     private void SpawnMeteor()
     {
-       Vector2 position = new Vector2(player.position.x+ Random.Range(-100, 100), player.position.y +  Random.Range(-100, 100));
+
+        NativeArray<Vector2> result = new NativeArray<Vector2>(1, Allocator.TempJob);
+        RandomPosition Job = new RandomPosition
+        {
+            index = CurrentMeteorCount+1,
+            SpawnPosition = result
+        };
+
+        JobHandle jobHandle = Job.Schedule();
+        jobHandle.Complete();
+
+        Vector2 position = Job.SpawnPosition[0];
+        result.Dispose();
+
         CurrentMeteorCount++;
+
+
         Instantiate(Meteor , position ,Quaternion.identity);
     }
 
 
-    public struct SpawnerProperties : IComponentData
+    public void CheckWave()
     {
-        public Entity Prefab;
-        public int CurrentMeteorCount;
-        public int MeteorCountPerWave;
-        public int MeteorIncreasePerWave;
-
+        if (CurrentMeteorCount == 0)
+        {
+            MeteorCountPerWave += MeteorIncreasePerWave;
+            StartNewWave();
+        }
     }
 
-    public class SpawnerBaker : Baker<MeteorSpawnerMono>
+
+
+}
+
+
+
+[BurstCompile]
+public struct RandomPosition : IJob
+{
+    public int index;
+
+    public NativeArray<Vector2> SpawnPosition;
+    public void Execute()
     {
-        public override void Bake(MeteorSpawnerMono authoring)
-        {
-            // add logic here later
-            SpawnerProperties sp = default;
+        var seed = (uint)(index);
+        var rnd = new Unity.Mathematics.Random(seed);
+        SpawnPosition[0] =  new Vector2( rnd.NextInt(-100, 100), rnd.NextInt(-100, 100)); 
 
-
-            sp.Prefab = GetEntity(authoring.Meteor);
-            sp.CurrentMeteorCount = authoring.CurrentMeteorCount;
-            sp.MeteorCountPerWave = authoring.MeteorCountPerWave;
-            sp.MeteorIncreasePerWave = authoring.MeteorIncreasePerWave;
-
-            AddComponent(sp);
-        }
     }
 }
