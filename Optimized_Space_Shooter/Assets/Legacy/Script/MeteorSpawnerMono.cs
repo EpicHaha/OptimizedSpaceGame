@@ -8,7 +8,8 @@ public class MeteorSpawnerMono : MonoBehaviour
     public int CurrentMeteorCount;
     public int MeteorCountPerWave;
     public int MeteorIncreasePerWave;
-    [SerializeField] private Transform player;
+
+
 
     private void Start()
     {
@@ -26,6 +27,11 @@ public class MeteorSpawnerMono : MonoBehaviour
     {
 
         Vector2 position = new Vector2 (UnityEngine.Random.Range(-40,40), UnityEngine.Random.Range(-40, 40));
+
+/*        GameObject GO = MeteorPooler.SharedInstance.GetPooledObject(0);
+        GO.transform.position = position;
+        GO.SetActive(true);
+*/ 
 
         Instantiate(Meteor , position ,Quaternion.identity);
     }

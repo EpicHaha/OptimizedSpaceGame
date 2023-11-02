@@ -156,7 +156,6 @@ MonoBehaviour:
   CurrentMeteorCount: 0
   MeteorCountPerWave: 10
   MeteorIncreasePerWave: 10
-  player: {fileID: 374998641}
 --- !u!4 &283219562
 Transform:
   m_ObjectHideFlags: 0
@@ -172,11 +171,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &374998641 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8246779527531030825, guid: 963e9505f53295f48ba6cb02b2bfc122, type: 3}
-  m_PrefabInstance: {fileID: 754418119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &754418119
 PrefabInstance:
   m_ObjectHideFlags: 0
