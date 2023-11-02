@@ -13,8 +13,8 @@ using Unity.Burst;
         {
         RequireForUpdate<PlayerTag>();
         RequireForUpdate<PlayerMovementInput>();
-
-            MovementActions = new MovementActions();
+        Debug.Log("<b> <size=13> <color=#9DF155>Info : 3 SetDataSystem : Setting Data .</color> </size> </b>");
+        MovementActions = new MovementActions();
         }
 
         protected override void OnStartRunning()
