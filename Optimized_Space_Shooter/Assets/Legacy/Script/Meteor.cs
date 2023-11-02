@@ -5,11 +5,13 @@ using Unity.Burst;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
+[BurstCompile(CompileSynchronously = true)]
 public class Meteor : Damagable
 {
     public Vector2 targetPosition;
 
 
+    [BurstCompile(CompileSynchronously = true)]
     private void Update()
     {
 
@@ -30,7 +32,7 @@ public class Meteor : Damagable
     }
 }
 
-[BurstCompile]
+[BurstCompile(CompileSynchronously = true)]
 public struct DetermineNextPosition : IJob
 {
     public Vector2 currentPosition;

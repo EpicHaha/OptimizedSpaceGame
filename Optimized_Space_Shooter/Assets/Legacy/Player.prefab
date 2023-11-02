@@ -389,7 +389,7 @@ MonoBehaviour:
   health: 100
   Speed: 0.01
   RotationSpeed: 0.5
-  Damage: 0
+  Damage: 100
 --- !u!50 &4469863412318409874
 Rigidbody2D:
   serializedVersion: 4

@@ -1,5 +1,4 @@
-using Unity.Burst.CompilerServices;
-using Unity.Entities;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 namespace Player
@@ -9,7 +8,7 @@ namespace Player
         public float Speed;
         public float RotationSpeed;
         public int Damage;
-
+        [SerializeField] private MeteorSpawnerMono meteorSpawnerMono;
         private void Update()
         {
             if (Input.GetKey(KeyCode.D))
@@ -58,9 +57,30 @@ namespace Player
             {
                 hit.transform.gameObject.GetComponent<Damagable>().TakeDamage(Damage);
                 print(hit.transform);
+                meteorSpawnerMono.CurrentMeteorCount--;
+                meteorSpawnerMono.CheckWave();
+
             }
         }
 
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.GetComponent<Meteor>() != null)
+            {
+                Destroy(collision.gameObject);
+                meteorSpawnerMono.CurrentMeteorCount--;
+                meteorSpawnerMono.CheckWave();
+                TakeDamage(21);
+            
+            }
+
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
 
     }
 }
