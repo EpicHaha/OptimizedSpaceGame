@@ -23,8 +23,8 @@ public class Meteor : Damagable
 
         JobHandle jobHandle = Job.Schedule();
         jobHandle.Complete();
-       // transform.position = result[0];
-         transform.position = Vector2.Lerp(transform.position, Vector3.zero, 0.001f);
+        transform.position = result[0];
+         //transform.position = Vector2.Lerp(transform.position, Vector3.zero, 0.001f);
         result.Dispose();
 
     }
