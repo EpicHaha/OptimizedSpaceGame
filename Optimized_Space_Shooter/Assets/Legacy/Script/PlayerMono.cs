@@ -5,10 +5,9 @@ namespace Player
 {
     public class PlayerMono : Damagable
     {
-        public float Speed;
-        public float RotationSpeed;
-        public int Damage;
-        [SerializeField] private MeteorSpawnerMono meteorSpawnerMono;
+        private static float Speed = 0.005f;
+        private static  float RotationSpeed = 0.05f;
+        [SerializeField] private  MeteorSpawnerMono meteorSpawnerMono;
         private void Update()
         {
             if (Input.GetKey(KeyCode.D))
@@ -55,7 +54,7 @@ namespace Player
             Debug.DrawLine(transform.position + transform.up, transform.TransformDirection(Vector3.up) * 1000);
             if (hit)
             {
-                hit.transform.gameObject.GetComponent<Damagable>().TakeDamage(Damage);
+                hit.transform.gameObject.GetComponent<Damagable>().TakeDamage(100);
                 print(hit.transform);
                 meteorSpawnerMono.CurrentMeteorCount--;
                 meteorSpawnerMono.CheckWave();

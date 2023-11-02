@@ -8,8 +8,6 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 [BurstCompile(CompileSynchronously = true)]
 public class Meteor : Damagable
 {
-    public Vector2 targetPosition;
-
 
     [BurstCompile(CompileSynchronously = true)]
     private void Update()

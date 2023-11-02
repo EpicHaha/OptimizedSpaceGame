@@ -4,10 +4,10 @@ using Unity.Burst;
 [BurstCompile(CompileSynchronously = true)]
 public class MeteorSpawnerMono : MonoBehaviour
 {
-   public GameObject Meteor;
+   [SerializeField] private  GameObject Meteor;
     public int CurrentMeteorCount;
-    public int MeteorCountPerWave;
-    public int MeteorIncreasePerWave;
+    private static int MeteorCountPerWave = 10;
+    private static int MeteorIncreasePerWave = 5;
 
 
 
@@ -32,14 +32,14 @@ public class MeteorSpawnerMono : MonoBehaviour
         GO.transform.position = position;
         GO.SetActive(true);
 */ 
-
+        CurrentMeteorCount++;
         Instantiate(Meteor , position ,Quaternion.identity);
     }
 
 
     public void CheckWave()
     {
-        if (CurrentMeteorCount == 0)
+        if (CurrentMeteorCount < 1)
         {
             MeteorCountPerWave += MeteorIncreasePerWave;
             StartNewWave();
