@@ -28,3 +28,5 @@ for cpus to habdle.
 
 
 I added some screnshots showing cpu usage of scripts before and after optimization as well as physics taking up a wast majority of cpu usage. 
+
+I think I messed up the main branch so check the "final version" branch instead
