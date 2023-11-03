@@ -1,4 +1,4 @@
-# OptimizedSpaceGame
+i# OptimizedSpaceGame
 optimizing a space shooter
 
 I set my benchmark at 5000 objects. After innitial test of my project I recieved frame rate average of ~5.5 with highest framerate of 6.5. 
@@ -35,9 +35,10 @@ I also ended up setting some variables that would never change in game to static
 and meteor spawner, however if each meteor had it's own speed and maybe another variable it would be more efficien than keeping those variables public and dynamic.
 
 To use jobs and burst compiler I had to use unity DOTS- Data-Oriented Technology Stack a way to program in unity using a data oriented method rather than
-object oriented method. Most of it comes throught the use of entities, however I had issues with implementing entities and stuck to only using jobs and burst. 
+object oriented method. Most of it comes throught the use of entities, however I had issues with implementing entities and stuck to only using jobs and burst conpiling. 
 Jobs include scheduling, executing and manually collecting garbage left behind in the secondary threads, in a way that is more data oriented than 
-implementing methods. Another way I used a data oriented method is through the use of a burst complier , a compiler that simplified human readable code and
+implementing methods as jobs is Unity's internal c++ based system, allowing me to run my script alongside Unity's internal processing.
+Another way I used a data oriented method is through the use of a burst complier , a compiler that simplified human readable code and
 variables to a simpler data files that are easier for CPUs to handle. I also did various experiments such as using Unity.Mathematics' various variable types 
 such as int2, uint and Unity.mathematic Random  which are faster and simplier for to handle than vector2,int and Random.range respectively due to ease
 of performing operations on these values in binary form. However I ended up scrapping those uses of these variables as they were used for some 
@@ -49,6 +50,9 @@ entities. In which I created a custom baker for the spawner object that communic
 than having each of those classes and structs as a seperate component, making it harder to implement but easier for cpu to read. If I were to continue using entities I would
 have an entirely data-oriented method and a more memory efficient game.
 
+I added some screenshots showing cpu usage of scripts before and after optimization as well as physics taking up a wast majority of cpu usage. 
+
+Also I messed up github branches so the main branch is not functioning, check "final version" branch
 I added some screenshots showing cpu usage of scripts before and after optimization as well as physics taking up a wast majority of cpu usage. 
 
 Also I messed up github branches so the main branch is not functioning, check "final version" branch
