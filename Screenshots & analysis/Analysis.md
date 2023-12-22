@@ -6,8 +6,23 @@ I was working on it from my other github account after I created it innitially o
 getting deleted if it doesnt work again, maybe we could discuss getting it over to you in a flashdrive where all files will defintly be saved.
 ///////////////////////////////////////
 
+Additions
+///////////
+Movement is deliberately choppy , but might feel choppier in engine because for some reason it moves faster in build, so I had to make it slower in engine to make the build
+playable.The program runs fine at 10 object according to the profiler , specifically at 250 fps. Shots have no visuals so its hard to understand when they're occuring. I made
+a new build with 100 damage shots so its easier to see that objects are destroyed as they will be one shot .
+
+I use data oriented programming approach in my game not just by using a job, but also by how i use the job system as in the meteor script I do all of data manipulation within jobs,
+seperately from any data. I also updated my meteor spawner to keep track of current meteors in a struct , seperating part of my data from the calculations. This
+allows for better usage of cache as structs , when small enough ,( 1 variable is small enough) meaning that I will be using more previously untapped memory. 
+This has no significant meaning on my game or perforamnce but if I wanted to keep track of each wave individually and spawn waves based on timer, I could have
+a tracker for each seperate wave by creating a struct for each wave seperately. This is a minor implementation of data oriented design , but I couldnt think 
+of any other way of doing it within such a small project without switching to ECS which is unfortunatelly impossible for me even after another try of implementing ECS. 
 
 
+I also added an additional optimization based on my results from the profiler. Acording to the profiler the large amount of memory usage is due to physics. So I decided to disable
+the colldiers on  meteors if they are far enough from the player, this increased FPS from 5 to 30 at 5000 meteors.
+///////////
 
 
 I set my benchmark at 5000 objects. After innitial test of my project I recieved frame rate average of ~5.5 with highest framerate of 6.5. 

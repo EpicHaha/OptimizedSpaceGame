@@ -56,7 +56,7 @@ namespace Player
             {
                 hit.transform.gameObject.GetComponent<Damagable>().TakeDamage(100);
                 print(hit.transform);
-                meteorSpawnerMono.CurrentMeteorCount--;
+                meteorSpawnerMono.data.CurrentMeteorCount--;
                 meteorSpawnerMono.CheckWave();
 
             }
@@ -68,7 +68,7 @@ namespace Player
             if(collision.GetComponent<Meteor>() != null)
             {
                 Destroy(collision.gameObject);
-                meteorSpawnerMono.CurrentMeteorCount--;
+                meteorSpawnerMono.data.CurrentMeteorCount--;
                 meteorSpawnerMono.CheckWave();
                 TakeDamage(21);
             
